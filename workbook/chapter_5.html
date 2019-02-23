@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>This is Me</title>
+</head>
+<body>
+<div class="container">
+  <h1>People of Vue</h1>
+
+  <ul class="list-group">
+    <li class="list-group-item" v-for="candidate in candidates">
+      {{ candidate.name }}: {{ candidate.votes }} <button class="btn btn-default" @click.prevent="vote(candidate)">Vote</button>
+    </li>
+  </ul>
+
+  <input @keyup.delete="reset">
+
+  <h1>Our mayor is {{ winner.name }}</h1>
+</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+
+<script>
+  new Vue({
+    el: '.container',
+    data: {
+      candidates: [
+        { name: 'Mr.Black', votes: 0},
+        { name: 'Mr.White', votes: 0},
+        { name: 'Ms.Brown', votes: 0},
+        { name: 'Ms.Korea', votes: 0},
+      ]
+    },
+    methods: {
+      vote: function(candidate) {
+        // vote
+        candidate.votes += 1
+      },
+      reset: function() {
+        //reset all votes
+        for (var index in this.candidates) {
+          this.candidates[index].votes = 0
+        }
+
+      }
+    },
+    computed: {
+      winner: function() {
+        var sorted = this.candidates.sort(function (a, b) {
+          return b.votes - a.votes
+        });
+        return sorted[0]
+      }
+    },
+  })
+</script>
+</html>
