@@ -5,6 +5,7 @@
 <body>
 <div id="app" style="text-align:center;">
     <h1>You must send a message for help!</h1>
+    <h1 v-show="!message">please input text</h1>
     <textarea v-model="message"></textarea>
     <br>
     <button v-show="message">
