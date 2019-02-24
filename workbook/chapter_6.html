@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>People of Gaul</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+  <h1>People of Gaul</h1>
+
+  <!--list의 배열 출력 -->
+  <ul class="list-group">
+    <li class="list-group-item" v-for="person in people" >
+      {{ person.name }} {{ person.age }}
+    </li>
+  </ul>
+
+  <!--filter된 배열 출력-->
+  <h1>"Old" People of Gaul</h1>
+  <ul class="list-group">
+    <li v-for="person in old" class="list-group-item">
+      {{ person.name }} {{ person.age }}
+    </li>
+  </ul>
+
+  </div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+
+<script>
+  new Vue({
+    el: '.container',
+    data: {
+      people: [
+        {name: 'Jay', age: '27'},
+        {name: 'Cameron', age: '47'},
+        {name: 'Kite', age: '57'},
+        {name: 'Ace', age: '87'},
+        {name: 'Dean', age: '77'},
+      ㅎ]
+    },
+    computed: {
+      old: function() {
+        return this.people.filter(function(person){
+          return person.age >= 65;
+        });
+      }
+    }
+  })
+</script>
+</html>
