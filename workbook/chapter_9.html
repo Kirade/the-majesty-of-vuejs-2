@@ -1,0 +1,43 @@
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Horse-drawn Chariots</title>
+   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container" :style="currentStyle">
+    <div class="centered">
+      <h1>Paint Background</h1>
+      <input type="color" v-model="currentStyle.backgroundColor"/>
+    </div>
+  </div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+<script>
+ new Vue({
+   el: '.container',
+   data: {
+     currentStyle: {
+       backgroundColor: '#DB2',
+     },
+   },
+ });
+</script>
+
+<style type="text/css">
+  .centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+</html>
