@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Horse-drawn Chariots</title>
+   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Chariot Shopping</h1>
+    <ul class="list-group">
+      <chariot v-for="(chariot, index) in chariots"
+               @select="updateChariot"
+               :key="index" class="list-group-item"
+               :chariot="chariot"
+               :current="currentChariot"></chariot>
+    </ul>
+  </div>
+  <template id="chariot-template">
+    <li class="list-group-item">
+      {{ chariot.name }} {{ chariot.horses }}
+      <button
+          class="btn btn-default"
+          :disabled="chariot.riding"
+          @click="selectChariot">
+        {{ currentState }}
+      </button>
+    </li>
+  </template>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+<script>
+  Vue.component('chariot', {
+    props: ['chariot', 'current'],
+    template: '#chariot-template',
+    methods: {
+      selectChariot: function () {
+        this.$emit('select', this.chariot)
+      },
+    },
+    computed: {
+      currentState: function () {
+        if (this.current === null) {
+          return 'Pick Chariot'
+        }
+        else if (this.chariot.horses < this.current.horses) {
+          return 'Dissmiss horses'
+        }
+        else if (this.chariot.horses > this.current.horses) {
+          return 'Hire Horses'
+        }
+        else {
+          this.chariot.riding = true;
+          return 'Riding'
+        }
+      },
+    },
+  });
+
+  new Vue({
+    el: '.container',
+    data: {
+      chariots: [
+        {name: 'Olympus', horses: 4, riding: false},
+        {name: 'BuYong', horses: 3, riding: false},
+        {name: 'Spartan', horses: 2, riding: false},
+        {name: 'YeoPo', horses: 1, riding: false},
+      ],
+      currentChariot: null,
+    },
+    methods: {
+      updateChariot: function (chariot) {
+        this.currentChariot = chariot;
+        for (let element in this.chariots) {
+          if (element === this.currentChariot) {
+            this.chariots[element].riding = true;
+          }
+          else {
+            this.chariots[element].riding = false;
+          }
+        }
+      }
+    }
+  });
+
+</script>
+
+</html>
