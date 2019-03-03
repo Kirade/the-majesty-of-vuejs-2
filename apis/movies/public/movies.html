@@ -1,0 +1,30 @@
+<html>
+
+<head>
+  <meta charset="UTF-8"/>
+  <title>movies</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Movies</h1>
+    <table class="table table-striped">
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Director</th>
+        <th>Actions</th>
+      </tr>
+      <tr v-for="movie in moveies" is="movie-row" :movie="movie"></tr>
+    </table>
+  </div>
+
+  <template id="movie-row">
+
+  </template>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
